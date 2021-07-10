@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Arisan_slot.belongsTo(models.Arisan, {
+        foreignKey: 'ArisanId'
+      })
+      Arisan_slot.belongsTo(models.User, {
+        foreignKey: 'UserId'
+      })
     }
   };
   Arisan_slot.init({

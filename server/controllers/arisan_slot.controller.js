@@ -1,6 +1,18 @@
 const { Arisan_slot } = require('../models')
 
 class Arisan_slotController {
+  static async getOne (req, res, next) {
+    try {
+      console.log(req.params.arisan_slot_id);
+      let data = await Arisan_slot.findByPk(req.params.arisan_slot_id)
+      res.status(200).json({
+        status: 'success',
+        result: data != null ? data : []
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
   static async addNew(req, res, next) {
     try {
       const { ArisanId } = req.body
@@ -31,10 +43,11 @@ class Arisan_slotController {
       }
       let data = await Arisan_slot.update(newArisan,
         { where: { id: req.params.arisan_slot_id } })
+      let newData = await Arisan_slot.findByPk(req.params.arisan_slot_id)
       if (data) {
-        res.status(201).json({
+        res.status(200).json({
           status: 'success',
-          result: data
+          result: newData
         })
       } else {
         throw new Error('Failed update status Slot Arisan')
@@ -53,10 +66,11 @@ class Arisan_slotController {
       }
       let data = await Arisan_slot.update(newArisan,
         { where: { id: req.params.arisan_slot_id } })
+      let newData = await Arisan_slot.findByPk(req.params.arisan_slot_id)
       if (data) {
         res.status(200).json({
           status: 'success',
-          result: data
+          result: newData
         })
       } else {
         throw new Error('Failed update status Slot Arisan')

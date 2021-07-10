@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasMany(models.Arisan)
+      User.hasMany(models.Arisan_slot)
     }
   };
   User.init({
